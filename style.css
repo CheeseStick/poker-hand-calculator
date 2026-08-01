@@ -1,0 +1,209 @@
+/* Learn Poker web calculator — the app's deep-green felt, in CSS. */
+
+:root {
+  --felt-light: #207657;
+  --felt-dark: #0B3B2E;
+  --panel: rgba(255, 255, 255, 0.08);
+  --panel-strong: rgba(255, 255, 255, 0.14);
+  --ink: #f4f7f5;
+  --muted: rgba(244, 247, 245, 0.65);
+  --accent: #4da3ff;
+  --card-red: #d42e2e;
+  --card-black: #1a1a1f;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro", "Segoe UI", Roboto, "Apple SD Gothic Neo", sans-serif;
+  background: linear-gradient(135deg, var(--felt-light), var(--felt-dark)) fixed;
+  color: var(--ink);
+  touch-action: manipulation;          /* no double-tap zoom at the table */
+  -webkit-tap-highlight-color: transparent;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right)
+           env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px 6px;
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+h1 { font-size: 17px; font-weight: 700; margin: 0; }
+
+.header-buttons { display: flex; gap: 8px; }
+
+.chip-button {
+  font: inherit;
+  font-size: 13px;
+  color: var(--ink);
+  background: var(--panel-strong);
+  border: none;
+  border-radius: 999px;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+.chip-button:active { background: rgba(255, 255, 255, 0.25); }
+
+main {
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 0 16px 24px;
+}
+
+hr { border: none; border-top: 1px solid rgba(255, 255, 255, 0.15); margin: 14px 0; }
+
+/* ---- Zones panel ---- */
+
+.panel {
+  background: var(--panel);
+  border-radius: 14px;
+  padding: 14px;
+  display: grid;
+  gap: 12px;
+}
+
+.zone { text-align: center; }
+.zone-title { font-size: 12px; color: var(--muted); margin-bottom: 6px; }
+.card-row { display: flex; justify-content: center; gap: 6px; }
+
+#status {
+  min-height: 58px;
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: 6px;
+  text-align: center;
+}
+#status .prompt { color: var(--muted); font-size: 14px; }
+#status .stats { display: flex; gap: 26px; }
+#status .stat-title { font-size: 11px; color: var(--muted); }
+#status .stat-value { font-size: 18px; font-weight: 700; color: var(--accent); font-variant-numeric: tabular-nums; }
+
+/* ---- Opponent count ---- */
+
+.opponents {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 12px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.segmented { display: flex; background: var(--panel); border-radius: 9px; padding: 2px; }
+.segmented button {
+  font: inherit;
+  font-size: 14px;
+  color: var(--ink);
+  background: transparent;
+  border: none;
+  border-radius: 7px;
+  padding: 5px 16px;
+  cursor: pointer;
+}
+.segmented button.selected { background: var(--panel-strong); font-weight: 700; }
+
+/* ---- Suit tabs ---- */
+
+.suit-tabs { display: flex; gap: 8px; }
+.suit-tabs button {
+  flex: 1;
+  font: inherit;
+  font-size: 20px;
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 10px;
+  padding: 7px 0;
+  cursor: pointer;
+  position: relative;
+}
+.suit-tabs button.selected { border: 2px solid var(--accent); background: var(--panel); }
+.suit-tabs .red { color: #ff8a80; }
+.suit-tabs .badge {
+  position: absolute;
+  top: -6px;
+  right: -4px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  border-radius: 999px;
+  min-width: 18px;
+  height: 18px;
+  line-height: 18px;
+}
+
+/* ---- Rank grid ---- */
+
+.rank-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(52px, 1fr));
+  gap: 10px;
+  /* Selection rings are outlines (no layout size), so leave room for the
+     top row's ring instead of letting it paint over the suit tabs. */
+  margin-top: 16px;
+}
+
+/* ---- Cards ---- */
+
+.card {
+  aspect-ratio: 5 / 7;
+  width: 100%;
+  background: #fff;
+  border-radius: 10%/7%;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  container-type: inline-size;
+}
+.card .corner {
+  position: absolute;
+  top: 6%;
+  left: 8%;
+  font-weight: 700;
+  line-height: 1;
+  font-size: 28cqw;
+  display: grid;
+}
+.card .big {
+  position: absolute;
+  right: 8%;
+  bottom: 4%;
+  font-size: 50cqw;
+  line-height: 1;
+}
+.card.red { color: var(--card-red); }
+.card.black { color: var(--card-black); }
+
+.card.selected { outline: 3px solid var(--accent); outline-offset: 3px; }
+.card.dim { opacity: 0.35; }
+
+/* Fixed-size cards inside the zones */
+.card-row .card { width: 48px; flex: none; }
+
+.card.slot {
+  background: transparent;
+  border: 1.5px dashed rgba(255, 255, 255, 0.35);
+  cursor: default;
+}
+
+footer {
+  text-align: center;
+  font-size: 11px;
+  color: var(--muted);
+  padding: 8px 0 20px;
+}

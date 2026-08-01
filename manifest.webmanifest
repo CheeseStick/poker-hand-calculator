@@ -1,0 +1,13 @@
+{
+  "name": "Poker Hand Calculator",
+  "short_name": "Poker Calc",
+  "description": "Live best-hand and win-chance calculator for Texas Hold'em.",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#0B3B2E",
+  "theme_color": "#0B3B2E",
+  "icons": [
+    { "src": "icon-256.png", "sizes": "256x256", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0B3B2E">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Poker Hand Calculator</title>
+  <link rel="icon" href="icon-256.png">
+  <link rel="apple-touch-icon" href="icon-256.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1 id="title">Poker Hand Calculator</h1>
+    <div class="header-buttons">
+      <button id="lang-toggle" class="chip-button" type="button">EN</button>
+      <button id="reset" class="chip-button" type="button">지우기</button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Your cards + the board, exactly like the app's game-play mode. -->
+    <section class="panel">
+      <div class="zone">
+        <div class="zone-title" id="hole-title">내 카드</div>
+        <div class="card-row" id="hole-row"></div>
+      </div>
+      <div class="zone">
+        <div class="zone-title" id="board-title">보드</div>
+        <div class="card-row" id="board-row"></div>
+      </div>
+      <div id="status"></div>
+    </section>
+
+    <!-- How many opponents the win chance simulates against. -->
+    <section class="opponents">
+      <span id="opponents-label">상대 수</span>
+      <div class="segmented" id="opponent-picker"></div>
+    </section>
+
+    <hr>
+
+    <!-- Suit tabs, then the 13 ranks of the chosen suit. -->
+    <nav class="suit-tabs" id="suit-tabs"></nav>
+    <section class="rank-grid" id="rank-grid"></section>
+  </main>
+
+  <footer id="footer">Learn Poker · cheez.dev</footer>
+
+  <script src="poker.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
