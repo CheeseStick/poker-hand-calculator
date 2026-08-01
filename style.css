@@ -14,14 +14,20 @@
 
 * { box-sizing: border-box; }
 
-html, body {
+html {
+  height: 100%;
+  background-color: var(--felt-light);
+}
+
+body {
   margin: 0;
   min-height: 100%;
 }
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro", "Segoe UI", Roboto, "Apple SD Gothic Neo", sans-serif;
-  background: linear-gradient(135deg, var(--felt-light), var(--felt-dark)) fixed;
+  /* Vertical gradient: a uniform top edge is what lets theme-color blend. */
+  background: linear-gradient(180deg, var(--felt-light), var(--felt-dark)) fixed;
   color: var(--ink);
   touch-action: manipulation;          /* no double-tap zoom at the table */
   -webkit-tap-highlight-color: transparent;
